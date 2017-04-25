@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <script type="text/javascript">
+        var min=null, max=null, rw=720,re=new RegExp(/Android (\d+\.\d+)/),ua=navigator.userAgent,phoneScale = parseInt(window.screen.width)/rw;var string="if(parseFloat(RegExp.$1)>2.3){min=phoneScale;max=phoneScale}else{min=1;max=1}";var ptring="min=0.5;max=1.0";re.test(ua) ? eval(string) : eval(ptring);document.write('<meta name="viewport"content="width='+rw+',minimum-scale='+ min +', maximum-scale ='+ max +',user-scalable=no,target-densityDpi=device-dpi">');
+    </script>
+    <title>小米官方商城</title>
+    <link rel="stylesheet" href="statics/common/css/weui.min.css">
+    <link rel="stylesheet" href="statics/common/css/jquery-weui.min.css">
+     <link rel="stylesheet" href="statics/common/css/comStyle.css">
+    <link rel="stylesheet" href="statics/common/css/plugin/mobiscroll.2.13.2.css">
+    <link rel="stylesheet" href="statics/common/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="statics/css/index.css">
+</head>
+<body ontouchstart>
+<div class="miBox" style="width:720px;position: relative;margin: 0 auto">
+    <!--主体内容-->
+    <div id="container"></div>
+    <!--底部菜单栏-->
+    <div class="weui-tabbar mi-tabbar">
+        <a href="#/index" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+             <i class="fa fa-home"></i>
+            </div>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a href="#/product/category" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <i class="fa fa-newspaper-o"></i>
+            </div>
+            <p class="weui-tabbar__label">分类</p>
+        </a>
+        <a href="#/cart/index" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+                <i class="fa fa-cart-plus" style="font-size: 48px;margin-top: -9px;"></i>
+            </div>
+            <p class="weui-tabbar__label">购物车</p>
+        </a>
+        <a href="#/user/index" class="weui-tabbar__item">
+            <div class="weui-tabbar__icon">
+             <i class="fa fa-user-o"></i>
+            </div>
+            <p class="weui-tabbar__label">我的</p>
+        </a>
+    </div>
+
+</div>
+</body>
+</html>
+<script type='text/javascript' src='statics/common/js/jquery-2.1.1.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='statics/common/js/jquery-weui.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='statics/common/js/common.js' charset='utf-8'></script>
+<script type='text/javascript' src='statics/common/js/plugin/mobiscroll.2.13.2.js' charset='utf-8'></script>
+<script type='text/javascript' src='statics/common/js/swiper.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='statics/common/js/template.js' charset='utf-8'></script>
+<script type='text/javascript' src='statics/common/js/router.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='statics/js/xiaomi.js' charset='utf-8'></script>
+<script type="text/html" id="mi-index">
+    {{if header}}
+    <div class="mi-Search">
+        <img src="statics/images/logo_e6453b2.png">
+        <a href="#/search/index" class="search">搜索商品名称</a>
+        <a href="serviceLogin.html" class="mi-Login">登陆</a>
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {{each header.body.items as iterm}}
+            <div class="swiper-slide"><img src="{{iterm.img_url}}"/></div>
+            {{/each}}
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+   {{else}}
+    <div class="calssify-box">
+        <a href="#/index"><i class="fa  fa-angle-left left"></i></a>
+        <span class="calssify-title ">商品分类</span>
+        <a href="#/search/index"><i class="fa fa-search right"></i></a>
+    </div>
+    <div class="mi-nav-classify">
+        <ul>
+            {{each sections as section}}
+            {{if section.view_type=='category_title'}}
+            <li>{{section.body.category_name}}</li>
+            {{/if}}
+            {{/each}}
+        </ul>
+    </div>
+    {{/if}}
+    {{each sections as section}}
+    <div class="section">
+        {{if section.view_type=='list_broadcast'}}
+        <div class="{{section.view_type}}">
+            <div class="mi-notice" id="mi-notice">
+                {{each section.body.items as news }}
+                <a href="javascript:;">
+                    <div class="shop-logo-img"><img src="{{section.body.title_logo_url}}"></div>
+                    <div class="shop-notice">{{news.news_title}}</div>
+                </a>
+                {{/each}}
+            </div>
+        </div>
+        {{else if section.view_type=='cells_auto_fill'}}
+        <div class="{{section.view_type}}">
+            <div class="body"  style="width:{{section.body.w}}px;height:{{section.body.h}}px;">
+                {{each section.body.items as iterm }}
+                <div class="iterms" style="width:{{iterm.w}}px;height:{{iterm.h}}px;left:{{iterm.x}}px;top:{{iterm.y}}px;}">
+                    <a href="javascript:;">
+                        <img src="{{iterm.img_url}}">
+                    </a>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        {{else if section.view_type=='divider_line'}}
+        <div class="{{section.view_type}}" style="height:{{section.body.line_height}}px;background:{{section.body.line_color}}"></div>
+        {{else if section.view_type=='list_two_type1'}}
+        <div class="{{section.view_type}}">
+            {{each section.body.items as iterm }}
+            <div class="productBox">
+                <a href="javascript:;">
+                    <div class="img"><img src="{{iterm.img_url}}"></div>
+                    <div class="name">{{iterm.product_name}}</div>
+                    <div class="info">{{iterm.product_brief}}</div>
+                    <div class="price"><span>￥</span>{{iterm.product_price}}</div>
+                </a>
+            </div>
+            {{/each}}
+        </div>
+        {{else if section.view_type=='list_two_type5'}}
+        <div class="{{section.view_type}}">
+            {{each section.body.items as iterm }}
+            <div class="productBox">
+                <a href="javascript:;">
+                    <div class="img"><img src="{{iterm.img_url}}"></div>
+                    <div class="name">{{iterm.product_name}}</div>
+                    <div class="price"><span>￥</span>{{iterm.product_price}}</div>
+                </a>
+            </div>
+            {{/each}}
+        </div>
+        {{else if section.view_type=='list_action_title'}}
+        {{each section.body.items as listTitle }}
+        <div class="{{section.view_type}}">
+            <a href="javascript:;">{{listTitle.action_title}}></a>
+        </div>
+        {{/each}}
+
+        {{else if section.view_type=='list_one_type2'}}
+        {{each section.body.items as list_one_type2 }}
+        <div class="{{section.view_type}}">
+            <div class="mi-list-type">
+                <div class="type-Box">
+                    <img src="{{list_one_type2.img_url}}">
+                </div>
+                <div class="type-Box">
+                    <div class="product_name">{{list_one_type2.product_name}}</div>
+                    <div class="product_brief">{{list_one_type2.product_brief}}</div>
+                    <div class="product_price"><span>￥</span>{{list_one_type2.product_price}}</div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        {{else if section.view_type=='list_one_type3'}}
+        {{each section.body.items as list_one_type3 }}
+        <div class="{{section.view_type}}">
+            <div class="mi-list-type">
+                <div class="type-Box">
+                    <div class="product_name">{{list_one_type3.product_name}}</div>
+                    <div class="product_brief">{{list_one_type3.product_brief}}</div>
+                    <div class="product_price"><span>￥</span>{{list_one_type3.product_price}}</div>
+                </div>
+                <div class="type-Box">
+                    <img src="{{list_one_type3.img_url}}">
+                </div>
+            </div>
+        </div>
+        {{/each}}
+        {{else if section.view_type=='list_two_type10' || section.view_type=='list_two_type3' }}
+        <div class="{{section.view_type}} list_two_type">
+            <div class="iterms10">
+                {{each section.body.items as iterm }}
+                <a href="javascript:;">
+                    <div class="iterm-img">
+                        <img src="{{iterm.img_url}}">
+                    </div>
+                    <div class="product_name">{{iterm.product_name}}</div>
+                    <div class="product_price"><span>￥</span>{{iterm.product_price}}</div>
+                </a>
+                {{/each}}
+            </div>
+        </div>
+        {{else if section.view_type=='list_two_type11' || section.view_type=='list_two_type2'|| section.view_type=='list_two_type3'}}
+        <div class="{{section.view_type}} list_two_type-com">
+            <div class="iterms10">
+                {{each section.body.items as iterm }}
+                <a href="javascript:;">
+                    <div class="iterm-img">
+                        <img src="{{iterm.img_url}}">
+                    </div>
+                    <div class="product_name">{{iterm.product_name}}</div>
+                    <div class="product_price"><span>￥</span>{{iterm.product_price}}</div>
+                </a>
+                {{/each}}
+            </div>
+        </div>
+        {{else if section.view_type=='list_two_type12'}}
+        <div class="{{section.view_type}}">
+            {{each section.body.items as iterm }}
+            <div class="productBox">
+                <a href="javascript:;">
+                    <div class="img"><img src="{{iterm.img_url}}"></div>
+                    <div class="name">{{iterm.product_name}}</div>
+                    <div class="price"><span>￥</span>{{iterm.product_price}}</div>
+                </a>
+            </div>
+            {{/each}}
+        </div>
+        {{else if section.view_type=='list_one_type1' || section.view_type=='list_one_type9' || section.view_type=='list_one_type12' || section.view_type=='list_two_type5' || section.view_type=='list_one_type10' || section.view_type=='list_two_type10' }}
+        <div class="list-type {{section.view_type}}">
+            <div class="iterms10">
+                {{each section.body.items as iterm }}
+                <a href="javascript:;">
+                    <div class="iterm-img">
+                        <img src="{{iterm.img_url}}">
+                    </div>
+                    <div class="product_name">
+                        {{iterm.product_name}}
+                        <div class="product_price"><span>￥</span>{{iterm.product_price}}</div>
+                    </div>
+                    <div class="product_brief">{{iterm.product_brief}}</div>
+                </a>
+                {{/each}}
+            </div>
+        </div>
+        {{else if section.view_type=='category_title'}}
+        <div class="{{section.view_type}}">
+            <div class="category-list-name">
+                <div style="background: #eee;height: 15px;"></div>
+                <h3>{{section.body.category_name}}</h3>
+            </div>
+        </div>
+        {{else if section.view_type=='category_group'}}
+        <div class="{{section.view_type}}">
+            <div class="category-list-box">
+                {{each section.body.items as categoryList }}
+                <a href="javascript:;">
+                    <img src="{{categoryList.img_url}}">
+                    <p>{{categoryList.product_name}}</p>
+                </a>
+                {{/each}}
+            </div>
+
+        </div>
+        {{else}}
+        <div class="list-type {{section.view_type}}">
+            还没有输出的：{{section.view_type}}
+        </div>
+        {{/if}}
+    </div>
+    {{/each}}
+</script>
+<!--购物车模板-->
+<script type="text/html" id="cartContent">
+    <div class="calssify-box">
+        <a href="#/index"><i class="fa  fa-angle-left left"></i></a>
+        <span class="calssify-title ">购物车</span>
+        <a href="#/search/index"><i class="fa fa-search right"></i></a>
+    </div>
+    <div class="cartLogin">
+        <a href="javascript:;">
+            登陆后享受更多优惠
+            <span>去登陆 <i class="fa  fa-angle-right right"></i></span>
+        </a>
+    </div>
+    <div class="cartList">
+        <a href="javascript:;"><i class="fa fa-cart-plus"></i>购物车还是空的<span>去逛逛</span></a>
+    </div>
+    <div class="recomList">
+        <p class="recordTitle">为你推荐</p>
+        <ul>
+            {{each recom_list as iterm}}
+            <li>
+                <a href="javascript:;">
+                    <img src="{{iterm.image_url}}">
+                    <div class="itermIfo">
+                        <p>{{iterm.name}}</p>
+                        <p><span>￥</span>{{iterm.price}}</p>
+                    </div>
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</script>
+<!--我的个人中心-->
+<script type="text/html" id="miUser">
+    <div class="user-hd">
+        <div class="mi-user">
+            <span><img src="statics/images/avatar.png"></span>
+            <a href="serviceLogin.html">注册/登录</a>
+        </div>
+    </div>
+    <div class="weui-cells orders ad">
+        <a class="weui-cell weui-cell_access a2" href="serviceLogin.html">
+            <div class="weui-cell__bd">
+                <p>全部订单</p>
+            </div>
+            <i class="fa  fa-angle-right right"></i>
+        </a>
+    </div>
+    <div class="weui-grids personal-center">
+        <a href="serviceLogin.html" class="weui-grid js_grid">
+            <div class="weui-grid__icon">
+                <img src="statics/images/nav-1.png" alt="">
+            </div>
+            <p class="weui-grid__label">代付款</p>
+        </a>
+        <a href="serviceLogin.html" class="weui-grid js_grid">
+            <div class="weui-grid__icon">
+                <img src="statics/images/nav-1.png" alt="">
+            </div>
+            <p class="weui-grid__label">待收款</p>
+        </a>
+        <a href="serviceLogin.html" class="weui-grid js_grid">
+            <div class="weui-grid__icon">
+                <img src="statics/images/nav-4.png" alt="">
+            </div>
+            <p class="weui-grid__label">退换修</p>
+        </a>
+    </div>
+    <div class="weui-cells orders">
+        <a class="weui-cell weui-cell_access a1" href="serviceLogin.html">
+            <div class="weui-cell__hd">
+                <img src="statics/images/i-wallet.png">
+            </div>
+            <div class="weui-cell__bd">
+                <p>我的优惠</p>
+            </div>
+            <i class="fa  fa-angle-right right"></i>
+        </a>
+        <a class="weui-cell weui-cell_access a1" href="serviceLogin.html">
+            <div class="weui-cell__hd">
+                <img src="statics/images/i-service.png">
+            </div>
+            <div class="weui-cell__bd">
+                <p>服务中心</p>
+            </div>
+            <i class="fa  fa-angle-right right"></i>
+        </a>
+        <a class="weui-cell weui-cell_access a1" href="serviceLogin.html">
+            <div class="weui-cell__hd">
+                <img src="statics/images/i-mihome.png">
+            </div>
+            <div class="weui-cell__bd">
+                <p>小米之家</p>
+            </div>
+            <i class="fa  fa-angle-right right"></i>
+        </a>
+        <a class="weui-cell weui-cell_access a1" href="serviceLogin.html">
+            <div class="weui-cell__hd">
+                <img src="statics/images/i-setting.png">
+            </div>
+            <div class="weui-cell__bd">
+                <p>设置</p>
+            </div>
+            <i class="fa  fa-angle-right right"></i>
+        </a>
+    </div>
+</script>
+<!--搜索页面模板-->
+<script type="text/html" id="searchContent">
+    <div class="calssify-box">
+        <a href="#/index"><i class="fa fa-home left"></i></a>
+        <input type="text" class="s-box">
+        <i class="fa fa-search right"></i>
+    </div>
+    <div class="search-tontent-title">热门搜索</div>
+    {{each ad_list as iterm}}
+    {{if iterm.view_type=='cells_auto_fill'}}
+    {{each iterm.body.items as aditerm}}
+    <div class="{{iterm.view_type}}">
+        <img src="{{aditerm.img_url}}">
+    </div>
+    {{/each}}
+    {{/if}}
+    <div class="keybox">
+        <ul>
+            {{each keywords as key}}
+            <li style="border:solid 1px {{key.border_n}};color: {{key.font_n}};background: {{key.back_n}}"><span>{{key.word}}</span></li>
+            {{/each}}
+        </ul>
+    </div>
+
+
+    {{/each}}
+</script>

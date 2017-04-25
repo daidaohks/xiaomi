@@ -1,0 +1,7 @@
+﻿{
+"description": "成功",
+"lp": "https://lg.lp.account.xiaomi.com/lp/s?k=7D24e7543b07-7a7e-4a29-9c7f-b5d942c7a595",
+"loginUrl": "https://lg.account.xiaomi.com/longPolling/login?ticket=7D24e7543b07-7a7e-4a29-9c7f-b5d942c7a595&dc=lg",
+"code": 0,
+"qr": "https://account.xiaomi.com/pass/qr/login?ticket=7D24e7543b07-7a7e-4a29-9c7f-b5d942c7a595&dc=lg"
+}

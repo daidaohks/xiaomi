@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <script type="text/javascript">
+        var min=null, max=null, rw=720,re=new RegExp(/Android (\d+\.\d+)/),ua=navigator.userAgent,phoneScale = parseInt(window.screen.width)/rw;var string="if(parseFloat(RegExp.$1)>2.3){min=phoneScale;max=phoneScale}else{min=1;max=1}";var ptring="min=0.5;max=1.0";re.test(ua) ? eval(string) : eval(ptring);document.write('<meta name="viewport"content="width='+rw+',minimum-scale='+ min +', maximum-scale ='+ max +',user-scalable=no,target-densityDpi=device-dpi">');
+    </script>
+    <title>小米账号-登陆</title>
+    <link rel="stylesheet" href="statics/common/css/weui.min.css">
+    <link rel="stylesheet" href="statics/common/css/jquery-weui.min.css">
+    <link rel="stylesheet" href="statics/common/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="statics/css/serviceLogin.css">
+</head>
+<body>
+<div class="loginBox">
+    <div class="loginContent" id="loginContent">
+        <a class="top-right-ico" id="clickCode"><img src="statics/images/ercode_hover.png"></a>
+        <div class="header-box">
+            <div class="img">
+                <img src="statics/images/milogo@2x.png">
+            </div>
+            <div class="mi-title">小米账号登陆</div>
+        </div>
+        <div class="longIn">
+            <div class="login-name">
+                <input type="text" class="name-input" placeholder="邮箱/手机号码/小米帐号">
+            </div>
+            <div class="login-password">
+                <input type="password" class="password-input" placeholder="密码">
+            </div>
+        </div>
+        <div class="login-btn">
+            <a href="javascript:;" class="weui-btn weui-btn_primary">按钮</a>
+        </div>
+        <div class="others-login">
+            <div class="type-boder">
+                <fieldset class="oth_type_tit">
+                    <legend align="center" class="oth_type_txt">其他方式登录</legend>
+                </fieldset>
+            </div>
+            <div class="other-link">
+                <a href="javascript:;"><i class="fa fa-qq"></i></a>
+                <a href="javascript:;"><i class="fa fa-weibo"></i></a>
+                <a href="javascript:;"><i class="fa fa-weibo"></i></a>
+                <a href="javascript:;"><i class="fa fa-weixin"></i></a>
+            </div>
+            <div class="license">
+                <a href="javascript:;">注册小米账号</a>
+                <a href="javascript:;">忘记密码?</a>
+            </div>
+        </div>
+    </div>
+    <!--二维码-->
+    <div class="code-content" style="display: none" id="codeContent">
+        <a href="javascript:;" class="closeCode" id="CloseCode"><i class="fa fa-close"></i></a>
+        <div class="code-top-title">
+            <p>小米帐号扫码登录</p>
+            <p>请使用最新版MIUI中“我的小米”进行扫码登录</p>
+        </div>
+        <div class="codeImg">
+            <p class="loadtext">加载中,请稍后...</p>
+        </div>
+    </div>
+    <div class="mi-login-footer">
+        <div class="foot">
+            <ul class="lang-select-list">
+                <li><a href="javascript:void(0)"  class="lang-select-li current">简体</a>|</li>
+                <li><a href="javascript:void(0)"  class="lang-select-li">繁体</a>|</li>
+                <li><a href="javascript:void(0)"  class="lang-select-li">English</a>|</li>
+                <li><a href="javascript:void(0)" target="_blank">常见问题</a></li>
+            </ul>
+        </div>
+        <p>小米公司版权所有-京ICP备10046444--京ICP证110507号</p>
+        <p>京公网安备11010802020134号</p>
+    </div>
+</div>
+
+</body>
+</html>
+<script type='text/javascript' src='statics/common/js/jquery-2.1.1.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='statics/common/js/jquery-weui.min.js' charset='utf-8'></script>
+<script type='text/javascript' src='statics/common/js/common.js' charset='utf-8'></script>
+<script type="text/javascript">
+    $(function ($) {
+        var Img=new Image();
+        var serviceLogin={
+            int:function () {
+                serviceLogin.codeRequest();
+            },
+            codeRequest:function () {
+                $("#clickCode").on("click",function () {
+                    huiju.common.ajaxGet('code.json','',function (data) {
+                        success: {
+                            $("#loginContent").hide();
+                            $("#codeContent").show();
+                            Img.src=data.qr;
+                            Img.onload=function(){
+                                $(".codeImg").html('<img src="'+data.qr+'">');
+                            }
+                        }
+                    })
+                });
+                $("#CloseCode").on("click",function () {
+                    $("#codeContent").hide();
+                    $("#loginContent").show();
+                    $(".codeImg").html('<p class="loadtext">加载中,请稍后...</p>');
+                });
+
+            }
+        }
+        serviceLogin.int();
+    })
+</script>
