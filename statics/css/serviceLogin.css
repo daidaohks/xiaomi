@@ -1,0 +1,48 @@
+.win-mask{width:100%;height:100%;position:fixed;top:0;background:rgba(0,0,0,0);z-index:9000}
+.win-load-box{position:fixed;top:40%;left:50%;z-index:9999;color:#f4f4f4}
+.loading-box{position:relative;top:0;left:-50%;border-radius:5px;padding:20px;background:rgba(0,0,0,0.8)}
+.loadings{width:20px;height:20px;display:inline-table;vertical-align:middle;background:url('data:image/gif;base64,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') no-repeat;background-size:90%}
+html,body{font-size:100%;background:#eee}
+.loginBox{position: relative;margin: 0 auto;overflow: hidden;width:720px;padding-bottom: 30px;}
+.loginBox .loginContent{width: 100%;overflow: hidden;}
+.loginBox .loginContent .header-box{}
+.loginBox .loginContent a.top-right-ico{ position: absolute;  right: 0px;  top: 0px;  display: block;}
+.loginBox .loginContent a.top-right-ico img{width: 130px;}
+.loginBox .loginContent .header-box .img{ text-align: center;padding: 80px 0px 20px;}
+.loginBox .loginContent .header-box .img img{width:95px;}
+.loginBox .loginContent .header-box .mi-title{text-align: center;font-size: 38px;color: #333;}
+.loginBox .loginContent .longIn {background: #fff;overflow: hidden;width: 90%;margin: 0 auto;border-radius: 30px;margin-top: 60px;}
+.loginBox .loginContent .longIn .login-name {border-bottom: solid 1px #999;padding:8px 20px;}
+.loginBox .loginContent .longIn .login-name .name-input{width: 100%;font-size: 34px;border: none;color: #333;padding: 10px 0px;}
+.loginBox .loginContent .longIn .login-password .password-input{width: 100%;font-size: 34px;border: none;color: #333;padding: 10px 0px;}
+.loginBox .loginContent .longIn .login-password{padding:8px 20px;}
+.loginBox .loginContent .longIn input:focus{border: none!important;outline: none;}
+.loginBox .loginContent .login-btn {width: 100%;margin-top: 90px;}
+.loginBox .loginContent .login-btn a{width: 90%;  font-size: 34px;  padding: 0px;  background-color: #33b4ff;  border-radius: 60px;}
+.loginBox .loginContent .others-login{margin-top: 40px;}
+.loginBox .loginContent .others-login .type-boder{width: 90%;  margin: 0 auto;  font-size: 28px;padding: 0px;}
+.loginBox .loginContent .others-login .type-boder .oth_type_tit{border: none;border-top: 3px dashed #bdbdbd;}
+.loginBox .loginContent .others-login .type-boder .oth_type_tit .oth_type_txt{}
+.loginBox .loginContent .others-login .other-link {width: 90%;  margin: 0 auto;  text-align: center;  padding: 40px 0px;}
+.loginBox .loginContent .others-login .other-link a{color:#fff;width: 100px;height: 100px;border-radius: 50%;display: inline-block;  vertical-align: middle;  line-height: 100px;  font-size: 48px;margin-left: 10px;}
+.loginBox .loginContent .others-login .other-link a:nth-of-type(1){background: #0288d1;}
+.loginBox .loginContent .others-login .other-link a:nth-of-type(2){background: #d32f2f;}
+.loginBox .loginContent .others-login .other-link a:nth-of-type(3){background: #00aaee;}
+.loginBox .loginContent .others-login .other-link a:nth-of-type(4){background: #00d20d;}
+.loginBox .loginContent .others-login .license{text-align: center;    padding: 30px 0px 60px;}
+.loginBox .loginContent .others-login .license a{display: inline-block; color: #333;padding: 0px 20px;font-size: 28px;}
+.loginBox .mi-login-footer{ width: 100%;overflow: hidden;}
+.loginBox .mi-login-footer .foot{padding-bottom: 20px;}
+.loginBox .mi-login-footer .foot ul{  overflow: hidden;  text-align: center;}
+.loginBox .mi-login-footer .foot ul li{    display: inline-block;}
+.loginBox .mi-login-footer .foot ul li a{    color: #333;  padding: 0px 10px;font-size: 28px;}
+.loginBox .mi-login-footer p{    color: #333;  text-align: center;  font-size: 28px;  padding-top: 5px;}
+/**/
+.loginBox .code-content{width: 100%;overflow: hidden;    min-height: 990px;}
+.loginBox .code-content .code-top-title{ text-align: center}
+.loginBox .code-content .code-top-title p:nth-of-type(1){color: #ff6700;  font-size: 38px;  padding: 80px 0px 20px;}
+.loginBox .code-content .code-top-title p:nth-of-type(2){    font-size: 28px;  color: #333;}
+.loginBox .code-content .codeImg{text-align: center;  padding: 50px 100px 100px 100px;}
+.loginBox .code-content .codeImg img{vertical-align: middle;  width: 100%;}
+.loginBox .code-content .closeCode{position: absolute;  display: block;  width: 55px;  height: 55px;  line-height: 50px;  text-align: center;  border-radius: 50%;  right: 20px;  font-size: 34px;  top: 20px;  color: #333;  background: #ddd;}
+.loginBox .loadtext{font-size: 28px;color: #333;padding:240px 100px 240px 100px;background: #ffffff}
